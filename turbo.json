@@ -7,12 +7,12 @@
       "outputs": [".next/**", "!.next/cache/**"]
     },
     "dev": {
-      "dependsOn": ["db:generate"],
+      "dependsOn": ["generate"],
       "cache": false,
       "persistent": true
     },
     "db:seed": {
-      "dependsOn": ["db:generate"],
+      "dependsOn": ["generate"],
       "cache": false
     },
     "db:push": {

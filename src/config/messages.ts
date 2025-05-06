@@ -26,4 +26,8 @@ export const messages = {
   email_invalid: "Please enter a valid e-mail address.",
   password_length: "Your password must be at least 8 characters long.",
   invalid_sign_up_credentials: "Invalid sign up credentials",
+  delete_blob_success: "Image deleted successfully.",
+  delete_blob_error: "Failed to delete image.",
+  profile_onboarding_success: "Profile updated successfully.",
+  profile_onboarding_error: "Failed to update profile.",
 }

@@ -1,5 +1,6 @@
 {
   "app_name": "Authkit",
+  "domain": "collabtube.in",
   "sign_in": "Sign in",
   "sign_in_header": "Welcome back to CollabTube.",
   "email_placeholder": "email@domain.com",
@@ -53,5 +54,23 @@
   "please_wait": "Please wait...",
   "try_again": "Try again",
   "or_continue_with": "Or continue with",
-  "back_to_sign_in": "Back to sign in"
+  "back_to_sign_in": "Back to sign in",
+  "profile_onboarding_header": "Complete your initial profile",
+  "profile_onboarding_description": "This information will be used to personalize your experience.",
+  "profile_onboarding_success": "Profile completed successfully.",
+  "profile_onboarding_success_description": "You can now start using CollabTube.",
+  "profile_onboarding_error": "Failed to complete profile.",
+  "continue": "Continue",
+  "change_image": "Change image",
+  "remove_image": "Remove image",
+  "upload_image": "Upload image",
+  "profile_image": "Profile image",
+  "profile_image_size": "Files up to 2MB at least 400px by 400px",
+  "profile_image_aria_label": "Profile image upload",
+  "workspace_name_placeholder": "Enter your workspace name",
+  "workspace_name_label": "Workspace Name",
+  "workspace_image_label": "Workspace logo",
+  "workspace_URL": "Workspace URL",
+  "workspace_onboarding_header": "Create your workspace",
+  "workspace_onboarding_description": "This information will be used to create your workspace."
 }

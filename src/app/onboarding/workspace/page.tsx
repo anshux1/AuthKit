@@ -1,7 +1,7 @@
 import { headers } from "next/headers"
 import { redirect } from "next/navigation"
 import { AuthHeader } from "~/components/auth/AuthHeader"
-import { ProfileOnboardingForm } from "~/components/auth/OnboardingProfile"
+import { WorkspaceCreateForm } from "~/components/auth/OnboardingWorkspace"
 import { auth } from "~/lib/auth"
 import { getDictionary } from "~/utils/dictonaries"
 
@@ -13,15 +13,14 @@ export default async function page() {
   if (!session?.user) redirect("/auth/sign-in")
   return (
     <div className="w-full max-w-sm">
-      <AuthHeader title={dictionary.profile_onboarding_header} className="items-start" />
-      <p className="text-muted-foreground mt-0.5 mb-4 text-sm">
-        {dictionary.profile_onboarding_description}
-      </p>
-      <ProfileOnboardingForm
-        email={session.user.email}
-        name={session.user.name}
-        image={session.user.image || ""}
+      <AuthHeader
+        title={dictionary.workspace_onboarding_header}
+        className="items-start"
       />
+      <p className="text-muted-foreground mt-0.5 mb-4 text-sm">
+        {dictionary.workspace_onboarding_description}
+      </p>
+      <WorkspaceCreateForm onboarding />
     </div>
   )
 }

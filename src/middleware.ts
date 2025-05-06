@@ -23,11 +23,19 @@ export async function middleware(request: NextRequest) {
 
   if (isAuthenticated) {
     const onboardingStep = session?.user.onboardingStep
-    console.log("onboardingStep", onboardingStep)
-    if (
-      session.user.onboardingStatus === "pending" &&
-      pathname !== `/onboarding/${onboardingStep}`
-    ) {
+    const onboardingStatus = session?.user.onboardingStatus
+
+    if (onboardingStatus === "completed" && pathname.startsWith("/onboarding")) {
+      if (!orgs.length) {
+        return NextResponse.redirect(new URL("/join", request.nextUrl))
+      } else {
+        return NextResponse.redirect(
+          new URL(`/${orgs[0].slug}/dashboard`, request.nextUrl),
+        )
+      }
+    }
+
+    if (onboardingStatus === "pending" && pathname !== `/onboarding/${onboardingStep}`) {
       return NextResponse.redirect(new URL(`/onboarding/${onboardingStep}`, nextUrl))
     }
 
@@ -35,11 +43,7 @@ export async function middleware(request: NextRequest) {
       return NextResponse.redirect(new URL("/join", request.nextUrl))
     }
 
-    if (
-      (isPublicRoute || isAuthRoute) &&
-      orgs.length &&
-      session.user.onboardingStatus !== "pending"
-    ) {
+    if ((isPublicRoute || isAuthRoute) && orgs.length && onboardingStatus !== "pending") {
       return NextResponse.redirect(new URL(`/${orgs[0].slug}/dashboard`, request.nextUrl))
     }
 

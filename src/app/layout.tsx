@@ -24,7 +24,7 @@ export default async function RootLayout({
 }>) {
   const dictionary = await getDictionary()
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={`${inter.variable} bg-background min-h-screen w-full antialiased`}>
         <DictionaryContextProvider dictionary={dictionary}>
           <Providers>{children}</Providers>

@@ -4,6 +4,7 @@ import React from "react"
 import Image from "next/image"
 import { CircleUserRoundIcon, CloudUpload } from "lucide-react"
 import { Button } from "~/components/ui/button"
+import { cn } from "~/lib/utils"
 import { useDictionary } from "~/store/language"
 
 interface UploadAvatarSectionProps {
@@ -15,6 +16,7 @@ interface UploadAvatarSectionProps {
   progress: number
   image_alt: string
   image_header: string
+  className?: string
 }
 
 export function UploadImage({
@@ -26,10 +28,11 @@ export function UploadImage({
   progress,
   image_alt,
   image_header,
+  className,
 }: UploadAvatarSectionProps) {
   const { dictionary } = useDictionary()
   return (
-    <div className="flex gap-4">
+    <div className={cn("flex gap-4", className)}>
       <div
         className="border-input hover:border-foreground/50 hover:bg-accent/50 relative flex size-20 items-center justify-center overflow-hidden rounded-sm border border-dashed transition-colors"
         role="button"

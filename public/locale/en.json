@@ -52,6 +52,7 @@
   "current_password_placeholder": "Enter your current password",
   "submit_button": "Submit",
   "please_wait": "Please wait...",
+  "save": "Save",
   "try_again": "Try again",
   "or_continue_with": "Or continue with",
   "back_to_sign_in": "Back to sign in",
@@ -72,5 +73,9 @@
   "workspace_image_label": "Workspace logo",
   "workspace_URL": "Workspace URL",
   "workspace_onboarding_header": "Create your workspace",
-  "workspace_onboarding_description": "This information will be used to create your workspace."
+  "workspace_onboarding_description": "This information will be used to create your workspace.",
+  "profile_image_change_success": "Profile image changed successfully.",
+  "profile_image_change_error": "Failed to change profile image.",
+  "profile_name_change_success": "Profile name changed successfully.",
+  "profile_name_change_error": "Failed to change profile name."
 }

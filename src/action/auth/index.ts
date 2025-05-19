@@ -3,12 +3,19 @@
 import { headers } from "next/headers"
 import { messages } from "~/config/messages"
 import { auth } from "~/lib/auth"
-import { createAction } from "~/lib/safe-action"
-import { magicLinkLoginSchema, signInSchema, signUpSchema } from "./schema"
+import { createAction, createActionWithAuth } from "~/lib/safe-action"
 import {
+  changeEmailRequestSchema,
+  magicLinkLoginSchema,
+  signInSchema,
+  signUpSchema,
+} from "./schema"
+import {
+  InputTypeChangeEmailRequest,
   InputTypeMagicLinkLogin,
   InputTypeSignIn,
   InputTypeSignUp,
+  ReturnTypeChangeEmailRequest,
   ReturnTypeMagicLinkLogin,
   ReturnTypeSignIn,
   ReturnTypeSignUp,
@@ -82,7 +89,24 @@ const magicLinkLoginHandler = async (
     return { error: messages.magic_link_error }
   }
 }
+const changeEmailRequestHandler = async (
+  input: InputTypeChangeEmailRequest,
+): Promise<ReturnTypeChangeEmailRequest> => {
+  try {
+    await auth.api.changeEmail({
+      body: { newEmail: input.email },
+      headers: await headers(),
+    })
+    return { data: messages.email_change_req_success }
+  } catch {
+    return { error: messages.email_change_req_error }
+  }
+}
 
 export const signIn = createAction(signInSchema, signInHandler)
 export const signUp = createAction(signUpSchema, signUpHandler)
 export const magicLinkLogin = createAction(magicLinkLoginSchema, magicLinkLoginHandler)
+export const changeEmailRequest = createActionWithAuth(
+  changeEmailRequestSchema,
+  changeEmailRequestHandler,
+)

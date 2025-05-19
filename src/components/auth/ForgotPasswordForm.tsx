@@ -1,6 +1,6 @@
 "use client"
 
-import { zodResolver } from "@hookform/resolvers/zod"
+import { standardSchemaResolver } from "@hookform/resolvers/standard-schema"
 import { forgotPassword } from "~/action/auth/password"
 import { forgotPasswordSchema } from "~/action/auth/password/schema"
 import { InputTypeForgotPassword } from "~/action/auth/password/types"
@@ -16,7 +16,7 @@ import { useDictionary } from "~/store/language"
 export function ForgotPasswordForm() {
   const { dictionary } = useDictionary()
   const form = useForm<InputTypeForgotPassword>({
-    resolver: zodResolver(forgotPasswordSchema),
+    resolver: standardSchemaResolver(forgotPasswordSchema),
     defaultValues: {
       email: "",
     },

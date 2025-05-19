@@ -43,7 +43,7 @@ export default async function layout({ params, children }: SidebarLayoutProps) {
           </div>
         </header>
         <Separator />
-        <div className="mx-auto flex w-full max-w-4xl flex-1 flex-col gap-4 border-x p-4 pt-0 lg:px-8 lg:py-6">
+        <div className="mx-auto flex w-full flex-1 flex-col gap-4 border-x p-4 lg:px-8 lg:py-6">
           {children}
         </div>
       </SidebarInset>

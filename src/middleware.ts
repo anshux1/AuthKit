@@ -3,6 +3,17 @@ import { NextRequest, NextResponse } from "next/server"
 import { auth } from "./lib/auth"
 import { routes } from "./lib/auth/routes"
 
+async function safe<T>(promise: Promise<T>): Promise<T | null> {
+  try {
+    const data = await promise
+    console.log("Data from middleware:", data)
+    return data
+  } catch (error) {
+    console.log("Error in middleware:", error)
+    return null
+  }
+}
+
 export async function middleware(request: NextRequest) {
   const { nextUrl } = request
   const pathname = nextUrl.pathname
@@ -13,8 +24,8 @@ export async function middleware(request: NextRequest) {
 
   const headers = await nextHeaders()
   const [session, orgs] = await Promise.all([
-    auth.api.getSession({ headers }),
-    auth.api.listOrganizations({ headers }),
+    safe(auth.api.getSession({ headers })),
+    safe(auth.api.listOrganizations({ headers })),
   ])
 
   const isAuthenticated = !!session?.session
@@ -26,7 +37,7 @@ export async function middleware(request: NextRequest) {
     const onboardingStatus = session?.user.onboardingStatus
 
     if (onboardingStatus === "completed" && pathname.startsWith("/onboarding")) {
-      if (!orgs.length) {
+      if (!orgs?.length) {
         return NextResponse.redirect(new URL("/join", request.nextUrl))
       } else {
         return NextResponse.redirect(
@@ -39,11 +50,15 @@ export async function middleware(request: NextRequest) {
       return NextResponse.redirect(new URL(`/onboarding/${onboardingStep}`, nextUrl))
     }
 
-    if (!orgs.length && pathname !== "/join" && !pathname.startsWith("/onboarding/")) {
+    if (!orgs?.length && pathname !== "/join" && !pathname.startsWith("/onboarding/")) {
       return NextResponse.redirect(new URL("/join", request.nextUrl))
     }
 
-    if ((isPublicRoute || isAuthRoute) && orgs.length && onboardingStatus !== "pending") {
+    if (
+      (isPublicRoute || isAuthRoute) &&
+      orgs?.length &&
+      onboardingStatus !== "pending"
+    ) {
       return NextResponse.redirect(new URL(`/${orgs[0].slug}/dashboard`, request.nextUrl))
     }
 

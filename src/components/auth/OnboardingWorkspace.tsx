@@ -2,7 +2,7 @@
 
 import React, { useCallback, useRef } from "react"
 import { usePathname, useRouter } from "next/navigation"
-import { zodResolver } from "@hookform/resolvers/zod"
+import { standardSchemaResolver } from "@hookform/resolvers/standard-schema"
 import { deleteBlob } from "~/action/azure"
 import { createWorkspace } from "~/action/workspace"
 import { createWorkspaceSchema } from "~/action/workspace/schema"
@@ -28,7 +28,7 @@ export function WorkspaceCreateForm({ onboarding = false }: WorkspaceCreateFormP
   const { dictionary } = useDictionary()
   const fileInputRef = useRef<HTMLInputElement>(null)
   const form = useForm<InputTypeCreateWorkspace>({
-    resolver: zodResolver(createWorkspaceSchema),
+    resolver: standardSchemaResolver(createWorkspaceSchema),
     defaultValues: {
       name: "",
       image: "",

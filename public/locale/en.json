@@ -77,5 +77,8 @@
   "profile_image_change_success": "Profile image changed successfully.",
   "profile_image_change_error": "Failed to change profile image.",
   "profile_name_change_success": "Profile name changed successfully.",
-  "profile_name_change_error": "Failed to change profile name."
+  "profile_name_change_error": "Failed to change profile name.",
+  "change": "Change",
+  "personal_details_header": "Personal Details",
+  "personal_details_description": "Set your name and contact information, the email address entered here is used for your login access."
 }

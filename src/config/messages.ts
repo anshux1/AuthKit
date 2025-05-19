@@ -30,4 +30,7 @@ export const messages = {
   delete_blob_error: "Failed to delete image.",
   profile_onboarding_success: "Profile updated successfully.",
   profile_onboarding_error: "Failed to update profile.",
+  email_change_req_success:
+    "A verification link has been sent to your new email address.",
+  email_change_req_error: "Failed to update the email address. Please try again.",
 }

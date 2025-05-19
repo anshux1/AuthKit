@@ -1,6 +1,6 @@
 "use client"
 
-import { zodResolver } from "@hookform/resolvers/zod"
+import { standardSchemaResolver } from "@hookform/resolvers/standard-schema"
 import { magicLinkLogin } from "~/action/auth"
 import { magicLinkLoginSchema } from "~/action/auth/schema"
 import { InputTypeMagicLinkLogin } from "~/action/auth/types"
@@ -22,7 +22,7 @@ interface MagicLinkLoginProps {
 export function MagicLinkForm({ isInvitation, inviteLink, email }: MagicLinkLoginProps) {
   const { dictionary } = useDictionary()
   const form = useForm<InputTypeMagicLinkLogin>({
-    resolver: zodResolver(magicLinkLoginSchema),
+    resolver: standardSchemaResolver(magicLinkLoginSchema),
     defaultValues: {
       email: email,
       inviteLink: isInvitation ? inviteLink : undefined,

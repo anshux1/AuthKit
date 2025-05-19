@@ -1,6 +1,6 @@
 "use client"
 
-import { zodResolver } from "@hookform/resolvers/zod"
+import { standardSchemaResolver } from "@hookform/resolvers/standard-schema"
 import {
   resetPassword as resetPasswordHandler,
   setPassword as setPasswordHandler,
@@ -24,7 +24,7 @@ interface SetPasswordFormProps {
 export function SetPasswordForm({ reset, token }: SetPasswordFormProps) {
   const { dictionary } = useDictionary()
   const form = useForm<InputTypeSetPassword>({
-    resolver: zodResolver(setPasswordSchema),
+    resolver: standardSchemaResolver(setPasswordSchema),
     defaultValues: {
       newPassword: "",
       confirmPassword: "",

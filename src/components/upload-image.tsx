@@ -32,9 +32,12 @@ export function UploadImage({
 }: UploadAvatarSectionProps) {
   const { dictionary } = useDictionary()
   return (
-    <div className={cn("flex gap-4", className)}>
+    <div className={cn("flex gap-4")}>
       <div
-        className="border-input hover:border-foreground/50 hover:bg-accent/50 relative flex size-20 items-center justify-center overflow-hidden rounded-sm border border-dashed transition-colors"
+        className={cn(
+          "border-input hover:border-foreground/50 hover:bg-accent/50 relative flex size-20 items-center justify-center overflow-hidden rounded-sm border border-dashed transition-colors",
+          className,
+        )}
         role="button"
         onClick={() => fileInputRef.current?.click()}
         aria-label={currentImage ? dictionary.change_image : dictionary.upload_image}

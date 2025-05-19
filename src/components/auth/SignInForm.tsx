@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { zodResolver } from "@hookform/resolvers/zod"
+import { standardSchemaResolver } from "@hookform/resolvers/standard-schema"
 import { signIn } from "~/action/auth"
 import { signInSchema } from "~/action/auth/schema"
 import { InputTypeSignIn } from "~/action/auth/types"
@@ -17,7 +17,7 @@ import { useDictionary } from "~/store/language"
 export function SignInForm() {
   const { dictionary } = useDictionary()
   const form = useForm<InputTypeSignIn>({
-    resolver: zodResolver(signInSchema),
+    resolver: standardSchemaResolver(signInSchema),
     defaultValues: {
       email: "",
       password: "",

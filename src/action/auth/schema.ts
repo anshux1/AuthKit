@@ -17,3 +17,7 @@ export const magicLinkLoginSchema = z.object({
   email: z.string().email({ message: "Invalid email address" }),
   inviteLink: z.string().optional(),
 })
+
+export const changeEmailRequestSchema = z.object({
+  email: z.string().email({ message: "Email is required" }),
+})

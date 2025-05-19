@@ -1,6 +1,6 @@
 "use client"
 
-import { zodResolver } from "@hookform/resolvers/zod"
+import { standardSchemaResolver } from "@hookform/resolvers/standard-schema"
 import { signUp } from "~/action/auth"
 import { signUpSchema } from "~/action/auth/schema"
 import { InputTypeSignUp } from "~/action/auth/types"
@@ -16,7 +16,7 @@ import { useDictionary } from "~/store/language"
 export function SignupForm() {
   const { dictionary } = useDictionary()
   const form = useForm<InputTypeSignUp>({
-    resolver: zodResolver(signUpSchema),
+    resolver: standardSchemaResolver(signUpSchema),
     defaultValues: {
       name: "",
       email: "",

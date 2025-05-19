@@ -2,7 +2,7 @@
 
 import React, { useCallback, useRef } from "react"
 import { useRouter } from "next/navigation"
-import { zodResolver } from "@hookform/resolvers/zod"
+import { standardSchemaResolver } from "@hookform/resolvers/standard-schema"
 import { profileOnboarding } from "~/action/auth/onboarding"
 import { profileOnboardingSchema } from "~/action/auth/onboarding/schema"
 import { InputTypeProfileOnboarding } from "~/action/auth/onboarding/types"
@@ -38,7 +38,7 @@ export function ProfileOnboardingForm({
   const fileInputRef = useRef<HTMLInputElement>(null)
 
   const form = useForm<InputTypeProfileOnboarding>({
-    resolver: zodResolver(profileOnboardingSchema),
+    resolver: standardSchemaResolver(profileOnboardingSchema),
     defaultValues: {
       name,
       image,

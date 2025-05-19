@@ -5,7 +5,10 @@ const nextConfig: NextConfig = {
     nodeMiddleware: true,
   },
   images: {
-    remotePatterns: [{ hostname: "todofy.blob.core.windows.net" }],
+    remotePatterns: [
+      { hostname: "todofy.blob.core.windows.net" },
+      { hostname: "lh3.googleusercontent.com" },
+    ],
   },
 }
 

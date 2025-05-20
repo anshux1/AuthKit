@@ -86,7 +86,7 @@ export const PersonalDetails = ({ name, email, image }: PersonalDetailsProps) =>
   const onSubmit = async (value: InputTypeUpdateProfile) => await updateProfile(value)
 
   return (
-    <Card className="bg-background mx-auto w-full max-w-lg shadow-none">
+    <Card className="shadow-none">
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <CardContent className="space-y-6 pb-6">

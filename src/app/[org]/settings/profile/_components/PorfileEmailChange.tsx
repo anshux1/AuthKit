@@ -21,6 +21,7 @@ import { InputField } from "~/components/ui/form-fields"
 import { Input } from "~/components/ui/input"
 import { Label } from "~/components/ui/label"
 import { useAction } from "~/hooks/useAction"
+import { useDictionary } from "~/store/language"
 
 export const EmailChangeForm = ({
   email,
@@ -29,6 +30,7 @@ export const EmailChangeForm = ({
   email: string
   children: ReactNode
 }) => {
+  const { dictionary } = useDictionary()
   const form = useForm<InputTypeChangeEmailRequest>({
     resolver: standardSchemaResolver(changeEmailRequestSchema),
     defaultValues: {
@@ -45,35 +47,40 @@ export const EmailChangeForm = ({
   return (
     <DialogDrawer>
       <DialogDrawerTrigger asChild>{children}</DialogDrawerTrigger>
-      <DialogDrawerContent className="w-full sm:max-w-sm">
-        <DialogDrawerHeader>
-          <DialogDrawerTitle>Change email address</DialogDrawerTitle>
+      <DialogDrawerContent className="w-full sm:max-w-md">
+        <DialogDrawerHeader className="px-6 sm:px-0">
+          <DialogDrawerTitle>{dictionary.change_email_header}</DialogDrawerTitle>
         </DialogDrawerHeader>
-        <div className="space-y-2">
-          <Label>Current email address</Label>
-          <div className="flex rounded-md shadow-xs">
-            <Input placeholder="Email" defaultValue={email} disabled type="email" />
-          </div>
-        </div>
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
-            <InputField
-              control={form.control}
-              name="email"
-              type="email"
-              label="New Email"
-              placeholder="Enter new email"
-            />
-            <div className="flex w-full justify-end space-x-2">
-              <DialogDrawerClose asChild>
-                <Button variant="secondary">Cancel</Button>
-              </DialogDrawerClose>
-              <Button disabled={isLoading} onSubmit={() => onSubmit(form.getValues())}>
-                Change
-              </Button>
+        <div className="space-y-3 p-6 pt-0 sm:p-0">
+          <div className="space-y-2">
+            <Label>{dictionary.current_email_label}</Label>
+            <div className="flex rounded-md shadow-xs">
+              <Input defaultValue={email} disabled type="email" />
             </div>
-          </form>
-        </Form>
+          </div>
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
+              <InputField
+                control={form.control}
+                name="email"
+                type="email"
+                label={dictionary.new_email_label}
+                placeholder={dictionary.new_email_placeholder}
+              />
+              <p className="text-muted-foreground text-sm">
+                {dictionary.change_email_instruction}
+              </p>
+              <div className="flex w-full justify-end space-x-2">
+                <DialogDrawerClose asChild>
+                  <Button variant="secondary">{dictionary.cancle}</Button>
+                </DialogDrawerClose>
+                <Button disabled={isLoading} onSubmit={() => onSubmit(form.getValues())}>
+                  {dictionary.change}
+                </Button>
+              </div>
+            </form>
+          </Form>
+        </div>
       </DialogDrawerContent>
     </DialogDrawer>
   )

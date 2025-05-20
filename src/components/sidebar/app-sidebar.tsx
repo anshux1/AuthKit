@@ -1,10 +1,12 @@
 "use client"
 
 import * as React from "react"
+import { usePathname } from "next/navigation"
 import {
   AudioWaveform,
   BookOpen,
   Bot,
+  ChevronLeft,
   Cog,
   Command,
   Frame,
@@ -26,8 +28,10 @@ import { NavMain } from "~/components/sidebar/nav-main"
 import { NavProjects } from "~/components/sidebar/nav-projects"
 import { NavUser } from "~/components/sidebar/nav-user"
 import { WorkspaceSwitcher } from "~/components/sidebar/workspace-switcher"
+import { LinkButton } from "../link-button"
 import { Separator } from "../ui/separator"
 import { NavSecondary } from "./nav-secondary"
+import { SettingsSidebar } from "./settings-sidebar"
 
 // This is sample data.
 const data = {
@@ -175,20 +179,42 @@ export function AppSidebar({
   slug,
   ...props
 }: React.ComponentProps<typeof Sidebar> & { slug: string }) {
+  const pathname = usePathname()
+  const isSettingsPage = pathname.includes("/settings")
   return (
     <Sidebar collapsible="offcanvas" {...props}>
       <SidebarHeader>
         <WorkspaceSwitcher />
       </SidebarHeader>
       <Separator />
-      <SidebarContent>
-        <NavMain items={data.navMain} />
-        <NavProjects projects={data.projects} />
-        <NavSecondary slug={slug} items={data.navSecondary} className="mt-auto" />
-      </SidebarContent>
-      <SidebarFooter>
-        <NavUser user={data.user} />
-      </SidebarFooter>
+      {isSettingsPage ? (
+        <SidebarContent className="p-3">
+          <div className="flex items-center gap-1">
+            <LinkButton
+              href={`/${slug}/dashboard`}
+              className="w-full justify-start px-3 [&_svg]:size-10"
+              variant="ghost"
+              size="icon"
+              asChild
+            >
+              <ChevronLeft />
+              <span className="text-[1rem]">Back to dashboard</span>
+            </LinkButton>
+          </div>
+          <SettingsSidebar slug={slug} pathname={pathname} />
+        </SidebarContent>
+      ) : (
+        <SidebarContent>
+          <NavMain items={data.navMain} />
+          <NavProjects projects={data.projects} />
+          <NavSecondary slug={slug} items={data.navSecondary} className="mt-auto" />
+        </SidebarContent>
+      )}
+      {!isSettingsPage && (
+        <SidebarFooter>
+          <NavUser user={data.user} />
+        </SidebarFooter>
+      )}
       <SidebarRail />
     </Sidebar>
   )

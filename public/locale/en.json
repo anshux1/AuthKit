@@ -79,6 +79,15 @@
   "profile_name_change_success": "Profile name changed successfully.",
   "profile_name_change_error": "Failed to change profile name.",
   "change": "Change",
+  "cancle": "Cancle",
   "personal_details_header": "Personal Details",
-  "personal_details_description": "Set your name and contact information, the email address entered here is used for your login access."
+  "personal_details_description": "Set your name and contact information, the email address entered here is used for your login access.",
+  "change_email_header": "Change email address",
+  "current_email_label": "Current email address",
+  "new_email_label": "New Email",
+  "new_email_placeholder": "Enter new email",
+  "change_email_instruction": "We will send a change request to your new email address. After clicking on the link in the email, you will be automatically logged out and and will need to login in again with your new email address.",
+  "preferences_header": "Preferences",
+  "preferences_description": "Change your preferred theme.",
+  "choose_a_theme": "Choose a theme"
 }

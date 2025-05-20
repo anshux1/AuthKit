@@ -15,10 +15,7 @@
       "dependsOn": ["generate"],
       "cache": false
     },
-    "db:push": {
-      "dependsOn": ["db:up"],
-      "cache": false
-    },
+    "db:push": {},
     "lint": {
       "dependsOn": ["^lint"]
     },

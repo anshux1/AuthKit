@@ -1,3 +1,5 @@
+"use client"
+
 import { useQuery, type AnyUseQueryOptions } from "@tanstack/react-query"
 import { authClient } from "~/lib/auth/client"
 import { Session, SessionData, User } from "~/types/auth"

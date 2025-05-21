@@ -1,6 +1,8 @@
 import { z } from "zod"
 
-const passwordSchema = z.string().min(8, "Password must be at least 8 characters long")
+export const passwordSchema = z
+  .string()
+  .min(8, "Password must be at least 8 characters long")
 
 export const forgotPasswordSchema = z.object({
   email: z.string().email({ message: "Please enter a valid email address" }),
@@ -10,6 +12,7 @@ export const setPasswordSchema = z
   .object({
     newPassword: passwordSchema,
     confirmPassword: passwordSchema,
+    currentPath: z.string().optional(),
   })
   .refine((data) => data.newPassword === data.confirmPassword, {
     message: "Oops! The passwords you entered do not match",

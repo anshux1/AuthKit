@@ -21,3 +21,7 @@ export const magicLinkLoginSchema = z.object({
 export const changeEmailRequestSchema = z.object({
   email: z.string().email({ message: "Email is required" }),
 })
+
+export const deleteUserSchema = z.object({
+  password: z.string().min(1, { message: "Password is required" }),
+})

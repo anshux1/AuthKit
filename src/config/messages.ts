@@ -33,4 +33,8 @@ export const messages = {
   email_change_req_success:
     "A verification link has been sent to your new email address.",
   email_change_req_error: "Failed to update the email address. Please try again.",
+  delete_account_success: "Account deleted successfully.",
+  delete_account_error: "Failed to delete account. Please try again.",
+  revoke_session_success: "Session revoked successfully.",
+  revoke_session_error: "Failed to revoke session. Please try again.",
 }

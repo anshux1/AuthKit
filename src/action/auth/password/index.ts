@@ -1,5 +1,7 @@
 "use server"
 
+import { revalidatePath } from "next/cache"
+import { headers } from "next/headers"
 import { messages } from "~/config/messages"
 import { auth } from "~/lib/auth"
 import { createAction, createActionWithAuth } from "~/lib/safe-action"
@@ -26,8 +28,10 @@ const setPasswordHandler = async (
   try {
     const { status } = await auth.api.setPassword({
       body: { newPassword: input.newPassword },
+      headers: await headers(),
     })
     if (!status) return { error: messages.set_password_error }
+    if (input.currentPath) revalidatePath(input.currentPath)
     return {
       data: {
         message: messages.set_password_success,

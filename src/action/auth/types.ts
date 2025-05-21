@@ -2,6 +2,7 @@ import { z } from "zod"
 import { ActionResponse, ActionState } from "~/types/action"
 import {
   changeEmailRequestSchema,
+  deleteUserSchema,
   magicLinkLoginSchema,
   signInSchema,
   signUpSchema,
@@ -24,3 +25,6 @@ export type ReturnTypeChangeEmailRequest = ActionState<
   InputTypeChangeEmailRequest,
   string
 >
+
+export type InputTypeDeleteUser = z.infer<typeof deleteUserSchema>
+export type ReturnTypeDeleteUser = ActionState<InputTypeDeleteUser, string>

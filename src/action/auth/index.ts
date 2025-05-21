@@ -6,16 +6,19 @@ import { auth } from "~/lib/auth"
 import { createAction, createActionWithAuth } from "~/lib/safe-action"
 import {
   changeEmailRequestSchema,
+  deleteUserSchema,
   magicLinkLoginSchema,
   signInSchema,
   signUpSchema,
 } from "./schema"
 import {
   InputTypeChangeEmailRequest,
+  InputTypeDeleteUser,
   InputTypeMagicLinkLogin,
   InputTypeSignIn,
   InputTypeSignUp,
   ReturnTypeChangeEmailRequest,
+  ReturnTypeDeleteUser,
   ReturnTypeMagicLinkLogin,
   ReturnTypeSignIn,
   ReturnTypeSignUp,
@@ -89,6 +92,7 @@ const magicLinkLoginHandler = async (
     return { error: messages.magic_link_error }
   }
 }
+
 const changeEmailRequestHandler = async (
   input: InputTypeChangeEmailRequest,
 ): Promise<ReturnTypeChangeEmailRequest> => {
@@ -102,6 +106,19 @@ const changeEmailRequestHandler = async (
     return { error: messages.email_change_req_error }
   }
 }
+const deleteUserHandler = async (
+  input: InputTypeDeleteUser,
+): Promise<ReturnTypeDeleteUser> => {
+  try {
+    await auth.api.deleteUser({
+      headers: await headers(),
+      body: { password: input.password },
+    })
+    return { data: messages.delete_account_success }
+  } catch {
+    return { error: messages.delete_account_error }
+  }
+}
 
 export const signIn = createAction(signInSchema, signInHandler)
 export const signUp = createAction(signUpSchema, signUpHandler)
@@ -110,3 +127,4 @@ export const changeEmailRequest = createActionWithAuth(
   changeEmailRequestSchema,
   changeEmailRequestHandler,
 )
+export const deleteUser = createActionWithAuth(deleteUserSchema, deleteUserHandler)

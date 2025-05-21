@@ -29,25 +29,27 @@ export const Breadcrumbs = ({
   const pathname = usePathname()
   const pathArray = pathname.split("/").filter((path) => path && path !== "app")
 
-  console.log(pathArray.join("/"))
   return (
     <Breadcrumb>
       <BreadcrumbList>
         <BreadcrumbItem>
           <DropdownMenu>
-            <DropdownMenuTrigger className="flex items-center gap-1">
+            <DropdownMenuTrigger className="flex cursor-pointer items-center gap-1 focus:ring-0 focus:outline-none">
               {slug.charAt(0).toUpperCase() + slug.slice(1)}
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="start">
-              {organizations.map((org) => (
-                <DropdownMenuItem
-                  asChild
-                  className={`${slug === org.slug && "bg-secondary"}`}
-                  key={org.id}
-                >
-                  <Link href="/">{org.name}</Link>
-                </DropdownMenuItem>
-              ))}
+            <DropdownMenuContent align="start" className="">
+              {organizations.map((org) => {
+                const link = `/${org.slug}/${pathArray.slice(1).join("/")}`
+                return (
+                  <DropdownMenuItem
+                    asChild
+                    className={slug === org.slug ? "bg-secondary" : undefined}
+                    key={org.id}
+                  >
+                    <Link href={link}>{org.name}</Link>
+                  </DropdownMenuItem>
+                )
+              })}
             </DropdownMenuContent>
           </DropdownMenu>
         </BreadcrumbItem>

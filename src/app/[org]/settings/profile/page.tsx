@@ -3,6 +3,7 @@ import { redirect } from "next/navigation"
 import { SettingsCardLayout } from "~/components/settings-card-layout"
 import { getSession } from "~/data/auth"
 import { getDictionary } from "~/utils/dictonaries"
+import { DeleteUser } from "./_components/DeleteUser"
 import { PersonalDetails } from "./_components/PersonalDetails"
 import { Preferences } from "./_components/Preferences"
 
@@ -26,6 +27,12 @@ export default async function page() {
         description={dictionary.preferences_description}
       >
         <Preferences />
+      </SettingsCardLayout>
+      <SettingsCardLayout
+        title={dictionary.delete_account_header}
+        description={dictionary.delete_account_description}
+      >
+        <DeleteUser />
       </SettingsCardLayout>
     </>
   )

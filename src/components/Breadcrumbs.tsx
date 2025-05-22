@@ -3,7 +3,7 @@
 import React from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Organization } from "better-auth/plugins"
+import { Organization } from "@prisma/client"
 import {
   Breadcrumb,
   BreadcrumbItem,

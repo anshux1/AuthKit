@@ -23,7 +23,6 @@ import { authClient } from "~/lib/auth/client"
 export function WorkspaceSwitcher() {
   const { isMobile } = useSidebar()
   const { isPending, data } = authClient.useListOrganizations()
-  console.log(data)
 
   if (isPending) {
     return <Skeleton className="h-12"></Skeleton>

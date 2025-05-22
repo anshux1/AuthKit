@@ -20,6 +20,7 @@
   "with_magic_link": "with magic link",
   "dont_have_account": "Don't have an account? ",
   "back_to_home": "Back to home",
+  "back_to_dashboard": "Back to Dashboard",
   "sign_up": "Sign up",
   "sign_up_header": "Welcome to CollabTube.",
   "name_label": "Name",
@@ -74,6 +75,7 @@
   "workspace_URL": "Workspace URL",
   "workspace_onboarding_header": "Create your workspace",
   "workspace_onboarding_description": "This information will be used to create your workspace.",
+  "create_new_workspace": "Create new workspace",
   "profile_image_change_success": "Profile image changed successfully.",
   "profile_image_change_error": "Failed to change profile image.",
   "profile_name_change_success": "Profile name changed successfully.",
@@ -94,8 +96,6 @@
   "change_password_description": "To make an update, enter your existing password followed by a new one. If you don't know your existing password, logout and use the forgot password link.",
   "old_password_label": "Old password",
   "old_password_placeholder": "Enter your old password",
-  "new_password_label": "New password",
-  "new_password_placeholder": "Enter your new password",
   "confirm_new_password_label": "Confirm new password",
   "confirm_new_password_placeholder": "Re-enter your new password",
   "password_mismatch": "Passwords do not match.",
@@ -116,5 +116,12 @@
   "manage_sessions_description": "Sign out your active sessions on other browsers and devices.",
   "current_session": "Current session",
   "sign_out": "Sign out",
-  "revoke": "Revoke"
+  "revoke": "Revoke",
+  "workspaces_header": "Workspaces",
+  "workspaces_description": "Manage your workspaces",
+  "create_workspace": "Create workspace",
+  "my_workspaces_header": "My Workspaces",
+  "my_workspaces_description": "Manage your workspaces.",
+  "member_workspaces_header": "Member workspaces",
+  "member_workspaces_description": "Workspaces you are a member of"
 }

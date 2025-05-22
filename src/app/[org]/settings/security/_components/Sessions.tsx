@@ -10,7 +10,7 @@ export const Sessions = async () => {
   })
   return (
     <Card className="shadow-none">
-      <CardContent className="space-y-6 pb-6">
+      <CardContent className="space-y-6">
         {sessions?.map((session) => <SessionCell key={session.id} session={session} />)}
       </CardContent>
     </Card>

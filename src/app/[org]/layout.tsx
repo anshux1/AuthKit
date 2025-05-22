@@ -11,7 +11,6 @@ interface SidebarLayoutProps {
 
 export default async function layout({ params, children }: SidebarLayoutProps) {
   const [{ org }, organizations] = await Promise.all([params, getOrganizations()])
-  console.log(organizations)
   return (
     <SidebarProvider>
       <AppSidebar slug={org} />

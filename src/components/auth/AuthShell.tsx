@@ -23,9 +23,9 @@ export const AuthShell = () => {
     : `${dictionary.sign_in} ${dictionary.with_magic_link}`
 
   return (
-    <div className="-mt-2">
+    <div className="-mt-2 space-y-2">
       <div className="text-muted-foreground mb-2 text-sm">
-        {isSignup ? dictionary.already_have_account : dictionary.dont_have_account}
+        {isSignup ? dictionary.already_have_account : dictionary.dont_have_account}{" "}
         <LinkButton
           className="p-0"
           variant="link"
@@ -36,28 +36,30 @@ export const AuthShell = () => {
       </div>
 
       {isMagicLinkActive ? <MagicLinkForm /> : isSignup ? <SignupForm /> : <SignInForm />}
-
-      <div className="mt-2 space-y-2">
-        <div className="before:bg-border after:bg-border flex items-center gap-3 before:h-px before:flex-1 after:h-px after:flex-1">
-          <span className="text-muted-foreground text-sm">
+      <div className="relative my-1.5">
+        <div className="absolute inset-0 flex items-center">
+          <span className="border-border w-full border-t" />
+        </div>
+        <div className="relative flex justify-center text-sm">
+          <span className="text-muted-foreground bg-background px-2 text-xs">
             {dictionary.or_continue_with}
           </span>
         </div>
-
-        <Button
-          onClick={() => setIsMagicLinkActive((prev) => !prev)}
-          variant="outline"
-          className="w-full"
-        >
-          {isMagicLinkActive ? (
-            <Lock className="size-4" />
-          ) : (
-            <WandSparkles className="size-4" />
-          )}
-          {toggleFormText}
-        </Button>
-        <SocialLogin />
       </div>
+
+      <Button
+        variant="outline"
+        className="w-full"
+        onClick={() => setIsMagicLinkActive(!isMagicLinkActive)} // Simplified toggle
+      >
+        {isMagicLinkActive ? (
+          <Lock className="mr-2 size-4" /> // Added mr-2
+        ) : (
+          <WandSparkles className="mr-2 size-4" /> // Added mr-2
+        )}
+        {toggleFormText}
+      </Button>
+      <SocialLogin />
     </div>
   )
 }

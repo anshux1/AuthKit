@@ -1,10 +1,10 @@
 import {
-  Bell,
-  BriefcaseBusiness,
-  Building,
-  CreditCard,
-  LockKeyhole,
-  User,
+  BellIcon,
+  Building2Icon,
+  BuildingIcon,
+  CreditCardIcon,
+  LockKeyholeIcon,
+  UserIcon,
 } from "lucide-react"
 
 export const settingsLinks = {
@@ -12,39 +12,39 @@ export const settingsLinks = {
     {
       title: "Profile",
       url: "/settings/profile",
-      icon: User,
+      icon: UserIcon,
     },
     {
       title: "Security",
       url: "/settings/security",
-      icon: LockKeyhole,
+      icon: LockKeyholeIcon,
     },
     {
       title: "Notifications",
       url: "/settings/notifications",
-      icon: Bell,
+      icon: BellIcon,
     },
     {
-      title: "Workspaces",
-      url: "/settings/workspaces",
-      icon: BriefcaseBusiness,
+      title: "Organizations",
+      url: "/settings/organizations",
+      icon: Building2Icon,
     },
     {
       title: "Billing",
       url: "/settings/billing",
-      icon: CreditCard,
+      icon: CreditCardIcon,
     },
   ],
-  workspace: [
+  organization: [
     {
-      title: "Workspace",
-      url: "/settings/workspace",
-      icon: Building,
+      title: "Organization",
+      url: "/settings/organization",
+      icon: BuildingIcon,
     },
     {
       title: "Members",
       url: "/settings/members",
-      icon: User,
+      icon: UserIcon,
     },
   ],
 }

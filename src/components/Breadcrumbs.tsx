@@ -19,13 +19,11 @@ import {
   DropdownMenuTrigger,
 } from "~/components/ui/dropdown-menu"
 
-export const Breadcrumbs = ({
-  slug,
-  organizations,
-}: {
-  slug: string
+interface BreadcrumbsProps {
+  org_slug: string
   organizations: Organization[]
-}) => {
+}
+export function Breadcrumbs({ org_slug, organizations }: BreadcrumbsProps) {
   const pathname = usePathname()
   const pathArray = pathname.split("/").filter((path) => path && path !== "app")
 
@@ -35,7 +33,7 @@ export const Breadcrumbs = ({
         <BreadcrumbItem>
           <DropdownMenu>
             <DropdownMenuTrigger className="flex cursor-pointer items-center gap-1 focus:ring-0 focus:outline-none">
-              {slug.charAt(0).toUpperCase() + slug.slice(1)}
+              {org_slug.charAt(0).toUpperCase() + org_slug.slice(1)}
             </DropdownMenuTrigger>
             <DropdownMenuContent align="start" className="">
               {organizations.map((org) => {
@@ -43,7 +41,7 @@ export const Breadcrumbs = ({
                 return (
                   <DropdownMenuItem
                     asChild
-                    className={slug === org.slug ? "bg-secondary" : undefined}
+                    className={org_slug === org.slug ? "bg-secondary" : undefined}
                     key={org.id}
                   >
                     <Link href={link}>{org.name}</Link>

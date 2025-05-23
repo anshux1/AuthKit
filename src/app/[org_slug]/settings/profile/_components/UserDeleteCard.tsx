@@ -25,7 +25,7 @@ import { InputField } from "~/components/ui/form-fields"
 import { useAction } from "~/hooks/useAction"
 import { useDictionary } from "~/store/language"
 
-export const DeleteUser = () => {
+export function UserDeleteCard() {
   const { dictionary } = useDictionary()
   const router = useRouter()
   const form = useForm<InputTypeDeleteUser>({

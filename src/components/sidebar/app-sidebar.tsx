@@ -27,7 +27,7 @@ import {
 import { NavMain } from "~/components/sidebar/nav-main"
 import { NavProjects } from "~/components/sidebar/nav-projects"
 import { NavUser } from "~/components/sidebar/nav-user"
-import { WorkspaceSwitcher } from "~/components/sidebar/workspace-switcher"
+import { OrgSwitcher } from "~/components/sidebar/OrgSwitcher"
 import { LinkButton } from "../link-button"
 import { Separator } from "../ui/separator"
 import { NavSecondary } from "./nav-secondary"
@@ -176,22 +176,22 @@ const data = {
 }
 
 export function AppSidebar({
-  slug,
+  org_slug,
   ...props
-}: React.ComponentProps<typeof Sidebar> & { slug: string }) {
+}: React.ComponentProps<typeof Sidebar> & { org_slug: string }) {
   const pathname = usePathname()
   const isSettingsPage = pathname.includes("/settings")
   return (
     <Sidebar collapsible="offcanvas" {...props}>
       <SidebarHeader>
-        <WorkspaceSwitcher />
+        <OrgSwitcher />
       </SidebarHeader>
       <Separator />
       {isSettingsPage ? (
         <SidebarContent className="p-3">
           <div className="flex items-center gap-1">
             <LinkButton
-              href={`/${slug}/dashboard`}
+              href={`/${org_slug}/dashboard`}
               className="w-full justify-start px-3 [&_svg]:size-10"
               variant="ghost"
               size="icon"
@@ -201,13 +201,13 @@ export function AppSidebar({
               <span className="text-[1rem]">Back to dashboard</span>
             </LinkButton>
           </div>
-          <SettingsSidebar slug={slug} pathname={pathname} />
+          <SettingsSidebar slug={org_slug} pathname={pathname} />
         </SidebarContent>
       ) : (
         <SidebarContent>
           <NavMain items={data.navMain} />
           <NavProjects projects={data.projects} />
-          <NavSecondary slug={slug} items={data.navSecondary} className="mt-auto" />
+          <NavSecondary slug={org_slug} items={data.navSecondary} className="mt-auto" />
         </SidebarContent>
       )}
       {!isSettingsPage && (

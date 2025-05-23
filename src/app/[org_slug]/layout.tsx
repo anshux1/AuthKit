@@ -2,18 +2,17 @@ import { Separator } from "~/components/ui/separator"
 import { SidebarInset, SidebarProvider, SidebarTrigger } from "~/components/ui/sidebar"
 import { Breadcrumbs } from "~/components/Breadcrumbs"
 import { AppSidebar } from "~/components/sidebar/app-sidebar"
-import { getOrganizations } from "~/data/workspace"
+import { getOrganizations } from "~/data/organization"
+import { LayoutPageProps, OrgParam } from "~/types/ui"
 
-interface SidebarLayoutProps {
-  params: Promise<{ org: string }>
-  children: React.ReactNode
+interface SidebarLayoutProps extends LayoutPageProps {
+  params: OrgParam
 }
-
-export default async function layout({ params, children }: SidebarLayoutProps) {
-  const [{ org }, organizations] = await Promise.all([params, getOrganizations()])
+export default async function Layout({ params, children }: SidebarLayoutProps) {
+  const [{ org_slug }, organizations] = await Promise.all([params, getOrganizations()])
   return (
     <SidebarProvider>
-      <AppSidebar slug={org} />
+      <AppSidebar org_slug={org_slug} />
       <SidebarInset>
         <header className="flex h-16 shrink-0 items-center gap-2">
           <div className="flex items-center gap-2 px-4">
@@ -23,7 +22,7 @@ export default async function layout({ params, children }: SidebarLayoutProps) {
               className="mr-2 data-[orientation=vertical]:h-4"
             />
             {organizations?.length && (
-              <Breadcrumbs slug={org} organizations={organizations} />
+              <Breadcrumbs org_slug={org_slug} organizations={organizations} />
             )}
           </div>
         </header>

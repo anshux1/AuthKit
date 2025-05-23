@@ -33,17 +33,22 @@ export function ForgotPasswordForm() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
         <InputField
           control={form.control}
           name="email"
           type="email"
           Icon={Mail}
+          disabled={isLoading}
           placeholder={dictionary.email_placeholder}
           label={dictionary.email_label}
           withIconPrefix
         />
-        <Button disabled={isLoading} className="w-full">
+        <Button
+          disabled={isLoading}
+          className="w-full"
+          aria-label={dictionary.reset_password}
+        >
           {isLoading ? dictionary.please_wait : dictionary.reset_password}
         </Button>
       </form>

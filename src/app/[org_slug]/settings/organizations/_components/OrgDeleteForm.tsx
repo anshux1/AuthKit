@@ -2,7 +2,7 @@
 
 import React from "react"
 import { useRouter } from "next/navigation"
-import { deleteWorkspace } from "~/action/workspace"
+import { deleteOrganization } from "~/action/organization"
 import { toast } from "sonner"
 import { Button } from "~/components/ui/button"
 import {
@@ -17,17 +17,15 @@ import {
 import { useAction } from "~/hooks/useAction"
 import { useDictionary } from "~/store/language"
 
-export function DeleteWorkspaceForm({
-  children,
-  workspaceId,
-}: {
+interface OrgDeleteFormProps {
   children: React.ReactNode
-  workspaceId: string
-}) {
-  const { dictionary } = useDictionary()
+  organizationId: string
+}
+export function OrgDeleteForm({ children, organizationId }: OrgDeleteFormProps) {
   const router = useRouter()
+  const { dictionary } = useDictionary()
 
-  const { execute, isLoading } = useAction(deleteWorkspace, {
+  const { execute, isLoading } = useAction(deleteOrganization, {
     onSuccess: (data) => {
       toast(data)
       router.replace("/auth/sign-in")
@@ -35,7 +33,7 @@ export function DeleteWorkspaceForm({
     onError: (error) => toast.error(error),
   })
 
-  const onSubmit = async () => execute({ organizationId: workspaceId })
+  const onSubmit = async () => execute({ organizationId })
 
   return (
     <DialogDrawer>
@@ -54,7 +52,12 @@ export function DeleteWorkspaceForm({
             <DialogDrawerClose asChild>
               <Button variant="secondary">{dictionary.cancle}</Button>
             </DialogDrawerClose>
-            <Button disabled={isLoading} variant="destructive" onClick={onSubmit}>
+            <Button
+              aria-label={dictionary.delete_account_button}
+              disabled={isLoading}
+              variant="destructive"
+              onClick={onSubmit}
+            >
               {dictionary.delete_account_button}
             </Button>
           </div>

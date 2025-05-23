@@ -19,7 +19,7 @@ import { UploadImage } from "~/components/upload-image"
 import { useAction } from "~/hooks/useAction"
 import { useFileUpload } from "~/hooks/useFileUpload"
 import { useDictionary } from "~/store/language"
-import { EmailChangeForm } from "./PorfileEmailChange"
+import { UserEmailChange } from "./UserEmailChange"
 
 interface PersonalDetailsProps {
   email?: string
@@ -27,7 +27,7 @@ interface PersonalDetailsProps {
   image?: string
 }
 
-export const PersonalDetails = ({ name, email, image }: PersonalDetailsProps) => {
+export function UserDetails({ name, email, image }: PersonalDetailsProps) {
   const id = useId()
   const pathname = usePathname()
   const { dictionary } = useDictionary()
@@ -117,14 +117,14 @@ export const PersonalDetails = ({ name, email, image }: PersonalDetailsProps) =>
                   placeholder={dictionary.email_placeholder}
                   type="email"
                 />
-                <EmailChangeForm email={email || ""}>
+                <UserEmailChange email={email || ""}>
                   <button
                     type="button"
                     className="border-input bg-background text-foreground hover:bg-accent hover:text-foreground focus-visible:border-ring focus-visible:ring-ring/50 inline-flex items-center rounded-e-md border px-3 text-sm font-medium transition-[color,box-shadow] outline-none focus:z-10 focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50"
                   >
                     {dictionary.change}
                   </button>
-                </EmailChangeForm>
+                </UserEmailChange>
               </div>
             </div>
           </CardContent>

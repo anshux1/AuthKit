@@ -4,7 +4,7 @@ import { ForgotPasswordForm } from "~/components/auth/ForgotPasswordForm"
 import { LinkButton } from "~/components/link-button"
 import { getDictionary } from "~/utils/dictonaries"
 
-export default async function page() {
+export default async function Page() {
   const dictionary = await getDictionary()
   return (
     <div className="w-full max-w-sm">

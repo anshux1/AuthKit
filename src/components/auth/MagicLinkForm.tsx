@@ -29,9 +29,9 @@ export function MagicLinkForm({ isInvitation, inviteLink, email }: MagicLinkLogi
     },
   })
   const { execute, isLoading } = useAction(magicLinkLogin, {
-    onSuccess: () =>
-      toast(dictionary.magic_link_success, {
-        description: dictionary.magic_link_success_description,
+    onSuccess: (data) =>
+      toast(data.message, {
+        description: data.description,
       }),
     onError: (error) => toast.error(error),
   })

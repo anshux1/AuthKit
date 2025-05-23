@@ -54,7 +54,7 @@ export function ProfileOnboardingForm({
   })
 
   const { execute, isLoading } = useAction(profileOnboarding, {
-    onSuccess: () => router.push("/onboarding/workspace"),
+    onSuccess: () => router.push("/onboarding/organization"),
     onError: (error) => toast.error(error),
   })
 

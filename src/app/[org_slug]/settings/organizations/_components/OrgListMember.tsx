@@ -3,31 +3,28 @@ import { Card } from "~/components/ui/card"
 import { UserAvatar } from "~/components/common/Avatar"
 import { getDictionary } from "~/utils/dictonaries"
 
-type MembersOrgsType = {
-  id: string
-  name: string
-  members: { role: string }[]
-  slug: string | null
-  logo: string | null
-  createdAt: Date
-  metadata: string | null
+interface OrgListMemberProps {
+  organizations?: {
+    id: string
+    name: string
+    members: { role: string }[]
+    slug: string | null
+    logo: string | null
+    createdAt: Date
+    metadata: string | null
+  }[]
+  org_slug: string
 }
-
-export async function MemberWorkspaceList({
-  organisations,
-  slug,
-}: {
-  organisations?: MembersOrgsType[]
-  slug: string
-}) {
+export async function OrgListMember({ organizations, org_slug }: OrgListMemberProps) {
   const dictionary = await getDictionary()
   return (
     <Card className="gap-0 p-4 shadow-none">
-      {organisations?.length ? (
-        organisations?.map((org, index) => (
+      {organizations?.length ? (
+        organizations?.map((org, index) => (
           <div
             key={org.id}
-            className={`hover:bg-secondary/10 flex h-16 items-center justify-between px-4 ${index !== organisations.length - 1 && "border-b"} ${index === 0 ? "rounded-t-lg" : ""} ${index === organisations.length - 1 ? "rounded-b-lg" : ""}`}
+            role="listitem"
+            className={`hover:bg-secondary/10 flex h-16 items-center justify-between px-4 ${index !== organizations.length - 1 && "border-b"} ${index === 0 ? "rounded-t-lg" : ""} ${index === organizations.length - 1 ? "rounded-b-lg" : ""}`}
           >
             <div className="flex items-center gap-2">
               <UserAvatar
@@ -37,8 +34,8 @@ export async function MemberWorkspaceList({
               <div className="grid flex-1 text-left text-sm leading-tight">
                 <div className="flex items-center gap-2">
                   <span className="truncate text-sm font-medium">{org.name}</span>
-                  {slug === org.slug && (
-                    <Badge variant="outline">{dictionary.current_workspace}</Badge>
+                  {org_slug === org.slug && (
+                    <Badge variant="outline">{dictionary.current_organization}</Badge>
                   )}
                 </div>
                 <span className="text-muted-foreground truncate text-xs">{org.slug}</span>
@@ -48,7 +45,7 @@ export async function MemberWorkspaceList({
         ))
       ) : (
         <div className="text-muted-foreground text-sm">
-          {dictionary.not_a_member_of_any_workspace}
+          {dictionary.not_a_member_of_any_organization}
         </div>
       )}
     </Card>

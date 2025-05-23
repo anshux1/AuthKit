@@ -17,7 +17,7 @@ const profileOnboardingHandler = async (
       data: {
         name: input.name,
         image: input.image,
-        onboardingStep: "workspace",
+        onboardingStep: "organization",
       },
     })
     return { data }

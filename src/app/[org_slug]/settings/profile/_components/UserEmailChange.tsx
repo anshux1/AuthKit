@@ -23,13 +23,11 @@ import { Label } from "~/components/ui/label"
 import { useAction } from "~/hooks/useAction"
 import { useDictionary } from "~/store/language"
 
-export const EmailChangeForm = ({
-  email,
-  children,
-}: {
+interface UserEmailChangeProps {
   email: string
   children: ReactNode
-}) => {
+}
+export function UserEmailChange({ email, children }: UserEmailChangeProps) {
   const { dictionary } = useDictionary()
   const form = useForm<InputTypeChangeEmailRequest>({
     resolver: standardSchemaResolver(changeEmailRequestSchema),

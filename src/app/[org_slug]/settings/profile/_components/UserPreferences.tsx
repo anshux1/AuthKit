@@ -2,19 +2,14 @@
 
 import React, { useId } from "react"
 import Image from "next/image"
+import { themeOptions } from "~/constants/config"
 import { CheckIcon, MinusIcon } from "lucide-react"
 import { useTheme } from "next-themes"
 import { Card, CardContent } from "~/components/ui/card"
 import { RadioGroup, RadioGroupItem } from "~/components/ui/radio-group"
 import { useDictionary } from "~/store/language"
 
-export const themeOptions = [
-  { label: "Light", value: "light", image: "/ui-light.png" },
-  { label: "Dark", value: "dark", image: "/ui-dark.png" },
-  { label: "System", value: "system", image: "/ui-system.png" },
-]
-
-export const Preferences = () => {
+export function UserPreferences() {
   const { dictionary } = useDictionary()
   const { theme, setTheme } = useTheme()
   const id = useId()

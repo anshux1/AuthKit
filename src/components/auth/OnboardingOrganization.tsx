@@ -4,9 +4,9 @@ import React, { useCallback, useRef } from "react"
 import { usePathname, useRouter } from "next/navigation"
 import { standardSchemaResolver } from "@hookform/resolvers/standard-schema"
 import { deleteBlob } from "~/action/azure"
-import { createWorkspace } from "~/action/workspace"
-import { createWorkspaceSchema } from "~/action/workspace/schema"
-import { InputTypeCreateWorkspace } from "~/action/workspace/types"
+import { createOrganization } from "~/action/organization"
+import { createOrganizationSchema } from "~/action/organization/schema"
+import { InputTypeCreateOrganization } from "~/action/organization/types"
 import { useForm, useWatch } from "react-hook-form"
 import { toast } from "sonner"
 import { Button } from "~/components/ui/button"
@@ -18,17 +18,19 @@ import { useFileUpload } from "~/hooks/useFileUpload"
 import { useDictionary } from "~/store/language"
 import { UploadImage } from "../upload-image"
 
-interface WorkspaceCreateFormProps {
+interface OrganizationCreateFormProps {
   onboarding?: boolean
 }
 
-export function WorkspaceCreateForm({ onboarding = false }: WorkspaceCreateFormProps) {
+export function OrganizationCreateForm({
+  onboarding = false,
+}: OrganizationCreateFormProps) {
   const pathname = usePathname()
   const router = useRouter()
   const { dictionary } = useDictionary()
   const fileInputRef = useRef<HTMLInputElement>(null)
-  const form = useForm<InputTypeCreateWorkspace>({
-    resolver: standardSchemaResolver(createWorkspaceSchema),
+  const form = useForm<InputTypeCreateOrganization>({
+    resolver: standardSchemaResolver(createOrganizationSchema),
     defaultValues: {
       name: "",
       image: "",
@@ -43,7 +45,7 @@ export function WorkspaceCreateForm({ onboarding = false }: WorkspaceCreateFormP
       form.setValue("image", data)
     },
   })
-  const { execute, isLoading } = useAction(createWorkspace, {
+  const { execute, isLoading } = useAction(createOrganization, {
     onSuccess: (data) => router.push(`/${data.slug}/dashboard`),
     onError: toast.error,
   })
@@ -67,7 +69,7 @@ export function WorkspaceCreateForm({ onboarding = false }: WorkspaceCreateFormP
     if (fileInputRef.current) fileInputRef.current.value = ""
   }, [currentImage, form])
 
-  const onSubmit = (value: InputTypeCreateWorkspace) => execute(value)
+  const onSubmit = (value: InputTypeCreateOrganization) => execute(value)
 
   return (
     <Form {...form}>
@@ -77,17 +79,17 @@ export function WorkspaceCreateForm({ onboarding = false }: WorkspaceCreateFormP
           fileInputRef={fileInputRef}
           handleFileChange={handleFileChange}
           handleRemovePhoto={handleRemovePhoto}
-          image_alt={dictionary.workspace_name_label}
-          image_header={dictionary.workspace_image_label}
+          image_alt={dictionary.organization_name_label}
+          image_header={dictionary.organization_image_label}
           isUploading={isUploading}
           progress={progress}
-          key="Workspace Image Upload"
+          key="organization Image Upload"
         />
         <InputField
           control={form.control}
           name="name"
-          label={dictionary.workspace_name_label}
-          placeholder={dictionary.workspace_name_placeholder}
+          label={dictionary.organization_name_label}
+          placeholder={dictionary.organization_name_placeholder}
           disabled={isLoading}
         />
         <FormField
@@ -95,7 +97,7 @@ export function WorkspaceCreateForm({ onboarding = false }: WorkspaceCreateFormP
           name="slug"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>{dictionary.workspace_URL}</FormLabel>
+              <FormLabel>{dictionary.organization_URL}</FormLabel>
               <div className="flex rounded-md shadow-xs">
                 <span className="border-input bg-background text-muted-foreground inline-flex items-center rounded-s-md border px-3 text-sm">
                   {dictionary.domain}/

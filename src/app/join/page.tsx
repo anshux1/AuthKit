@@ -1,7 +1,7 @@
 import { headers } from "next/headers"
 import { redirect } from "next/navigation"
 import { ArrowLeft } from "lucide-react"
-import { WorkspaceCreateForm } from "~/components/auth/OnboardingWorkspace"
+import { OrganizationCreateForm } from "~/components/auth/OnboardingOrganization"
 import { LinkButton } from "~/components/link-button"
 import { auth } from "~/lib/auth"
 import { getDictionary } from "~/utils/dictonaries"
@@ -19,12 +19,12 @@ export default async function page() {
       </LinkButton>
       <div className="w-full max-w-sm">
         <h1 className="mt-2 text-xl font-bold sm:text-2xl">
-          {dictionary.create_new_workspace}
+          {dictionary.create_new_organization}
         </h1>
         <p className="text-muted-foreground mt-0.5 mb-4 text-sm">
-          {dictionary.workspace_onboarding_description}
+          {dictionary.organization_onboarding_description}
         </p>
-        <WorkspaceCreateForm />
+        <OrganizationCreateForm />
       </div>
     </div>
   )

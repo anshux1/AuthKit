@@ -20,7 +20,7 @@ import { Skeleton } from "~/components/ui/skeleton"
 import { UserAvatar } from "~/components/common/Avatar"
 import { authClient } from "~/lib/auth/client"
 
-export function WorkspaceSwitcher() {
+export function OrgSwitcher() {
   const { isMobile } = useSidebar()
   const { isPending, data } = authClient.useListOrganizations()
 

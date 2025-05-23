@@ -30,6 +30,7 @@ export function SetPasswordForm({ reset, token }: SetPasswordFormProps) {
       confirmPassword: "",
     },
   })
+
   const { execute: setPasswordFn, isLoading: isSetting } = useAction(setPasswordHandler, {
     onSuccess: (data) => toast(data.message),
     onError: (error) => toast.error(error),

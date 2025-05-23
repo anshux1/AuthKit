@@ -7,18 +7,18 @@ import db from "~/db"
 import { auth } from "~/lib/auth"
 import { createActionWithAuth } from "~/lib/safe-action"
 import { AuthContext } from "~/types/auth"
-import { createWorkspaceSchema, deleteWorkspaceSchema } from "./schema"
+import { createOrganizationSchema, deleteOrganizationSchema } from "./schema"
 import {
-  InputTypeCreateWorkspace,
-  InputTypeDeleteWorkspace,
-  ReturnTypeCreateWorkspace,
-  ReturnTypeDeleteWorkspace,
+  InputTypeCreateOrganization,
+  InputTypeDeleteOrganization,
+  ReturnTypeCreateOrganization,
+  ReturnTypeDeleteOrganization,
 } from "./types"
 
-const createWorkspaceHandler = async (
-  input: InputTypeCreateWorkspace,
+const createOrganizationHandler = async (
+  input: InputTypeCreateOrganization,
   ctx: AuthContext,
-): Promise<ReturnTypeCreateWorkspace> => {
+): Promise<ReturnTypeCreateOrganization> => {
   try {
     const data = await auth.api.createOrganization({
       body: {
@@ -33,24 +33,24 @@ const createWorkspaceHandler = async (
         where: { email: ctx.user.email },
         data: {
           onboardingStatus: "completed",
-          onboardingStep: "workspace",
+          onboardingStep: "organization",
         },
       })
     }
     if (input.currentPath) revalidatePath(input.currentPath)
     if (!data) {
-      return { error: messages.create_workspace_error }
+      return { error: messages.create_organization_error }
     }
     return { data }
   } catch (err) {
     console.log(err)
-    return { error: messages.create_workspace_error }
+    return { error: messages.create_organization_error }
   }
 }
 
-const deleteWorkspaceHandler = async (
-  input: InputTypeDeleteWorkspace,
-): Promise<ReturnTypeDeleteWorkspace> => {
+const deleteOrganizationHandler = async (
+  input: InputTypeDeleteOrganization,
+): Promise<ReturnTypeDeleteOrganization> => {
   try {
     await auth.api.deleteOrganization({
       body: {
@@ -58,19 +58,19 @@ const deleteWorkspaceHandler = async (
       },
       headers: await headers(),
     })
-    return { data: messages.delete_workspace_success }
+    return { data: messages.delete_organization_success }
   } catch (err) {
     console.log(err)
-    return { error: messages.delete_workspace_error }
+    return { error: messages.delete_organization_error }
   }
 }
 
-export const createWorkspace = createActionWithAuth(
-  createWorkspaceSchema,
-  createWorkspaceHandler,
+export const createOrganization = createActionWithAuth(
+  createOrganizationSchema,
+  createOrganizationHandler,
 )
 
-export const deleteWorkspace = createActionWithAuth(
-  deleteWorkspaceSchema,
-  deleteWorkspaceHandler,
+export const deleteOrganization = createActionWithAuth(
+  deleteOrganizationSchema,
+  deleteOrganizationHandler,
 )

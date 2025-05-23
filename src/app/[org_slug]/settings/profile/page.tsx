@@ -3,9 +3,7 @@ import { redirect } from "next/navigation"
 import { SettingsCardLayout } from "~/components/settings-card-layout"
 import { getSession } from "~/data/auth"
 import { getDictionary } from "~/utils/dictonaries"
-import { DeleteUser } from "./_components/DeleteUser"
-import { PersonalDetails } from "./_components/PersonalDetails"
-import { Preferences } from "./_components/Preferences"
+import { UserDeleteCard, UserDetails, UserPreferences } from "./_components"
 
 export default async function page() {
   const [dictionary, session] = await Promise.all([getDictionary(), getSession()])
@@ -16,7 +14,7 @@ export default async function page() {
         title={dictionary.personal_details_header}
         description={dictionary.personal_details_description}
       >
-        <PersonalDetails
+        <UserDetails
           name={session.ctx.user.name}
           email={session.ctx.user.email}
           image={session.ctx.user.image || ""}
@@ -26,13 +24,13 @@ export default async function page() {
         title={dictionary.preferences_header}
         description={dictionary.preferences_description}
       >
-        <Preferences />
+        <UserPreferences />
       </SettingsCardLayout>
       <SettingsCardLayout
         title={dictionary.delete_account_header}
         description={dictionary.delete_account_description}
       >
-        <DeleteUser />
+        <UserDeleteCard />
       </SettingsCardLayout>
     </>
   )

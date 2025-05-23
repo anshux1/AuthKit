@@ -9,8 +9,8 @@ export default async function WorkspaceCreate({
 }) {
   const dictionary = await getDictionary()
   return (
-    <Card className="flex flex-row items-center justify-between px-4 py-3 shadow-none">
-      <p className="text-sm">
+    <Card className="flex flex-row items-center justify-between p-4 shadow-none">
+      <p className="text-muted-foreground text-sm">
         You have {ownedOrgsCount} of 6 workspaces available in your plan
       </p>
       <LinkButton href="/join" size="sm">

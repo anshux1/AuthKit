@@ -37,4 +37,8 @@ export const messages = {
   delete_account_error: "Failed to delete account. Please try again.",
   revoke_session_success: "Session revoked successfully.",
   revoke_session_error: "Failed to revoke session. Please try again.",
+  create_workspace_success: "Workspace created successfully.",
+  create_workspace_error: "Failed to create workspace.",
+  delete_workspace_success: "Workspace deleted successfully.",
+  delete_workspace_error: "Failed to delete workspace.",
 }

@@ -8,3 +8,8 @@ export const createWorkspaceSchema = z.object({
   currentPath: z.string().optional(),
   fromOnboarding: z.boolean().optional(),
 })
+
+export const deleteWorkspaceSchema = z.object({
+  organizationId: z.string().min(1, { message: "Organization ID cannot be empty" }),
+  currentPath: z.string().optional(),
+})

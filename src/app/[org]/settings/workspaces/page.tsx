@@ -1,11 +1,13 @@
 import { SettingsCardLayout } from "~/components/settings-card-layout"
 import { getOrganizations } from "~/data/workspace"
 import { getDictionary } from "~/utils/dictonaries"
+import { MemberWorkspaceList } from "./_components/MemberWorkspaces"
 import { OwnedWorkspacesList } from "./_components/OwnedWorkspacesList"
 import WorkspaceCreate from "./_components/WorkspaceCreate"
 
-export default async function page() {
-  const [dictionary, organisations] = await Promise.all([
+export default async function page({ params }: { params: Promise<{ org: string }> }) {
+  const [{ org }, dictionary, organisations] = await Promise.all([
+    params,
     getDictionary(),
     getOrganizations(),
   ])
@@ -27,13 +29,13 @@ export default async function page() {
         title={dictionary.my_workspaces_header}
         description={dictionary.my_workspaces_description}
       >
-        <OwnedWorkspacesList organisations={ownerOrgs} />
+        <OwnedWorkspacesList slug={org} organisations={ownerOrgs} />
       </SettingsCardLayout>
       <SettingsCardLayout
         title={dictionary.member_workspaces_header}
         description={dictionary.member_workspaces_description}
       >
-        <OwnedWorkspacesList organisations={memberOrgs} />
+        <MemberWorkspaceList slug={org} organisations={memberOrgs} />
       </SettingsCardLayout>
     </>
   )

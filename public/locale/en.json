@@ -123,5 +123,7 @@
   "my_workspaces_header": "My Workspaces",
   "my_workspaces_description": "Manage your workspaces.",
   "member_workspaces_header": "Member workspaces",
-  "member_workspaces_description": "Workspaces you are a member of"
+  "member_workspaces_description": "Workspaces you are a member of",
+  "not_a_member_of_any_workspace": "You're not a member of any workspaces",
+  "current_workspace": "Current workspace"
 }
